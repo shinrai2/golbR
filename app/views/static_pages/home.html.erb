@@ -1,4 +1,20 @@
 <% provide(:title, "Home") %>
+<% if logged_in? %>
+    <div class="row">
+        <!--aside class="col-md-4">
+            <section class="user_info">
+                <%= render 'shared/user_info' %>
+            </section>
+            <section class="post_form">
+                <%= render 'shared/post_form' %>
+            </section>
+        </aside-->
+        <div class="col-md-12">
+            <h3>Post Feed</h3>
+            <%= render 'shared/feed' %>
+        </div>
+    </div>
+<% else %>
 <div class="center jumbotron">
     <h1>Welcome to the Sample App</h1>
         <h2>
@@ -10,3 +26,30 @@
 </div>
 <%= link_to image_tag("rails.png", alt: "Rails logo"),
 'http://rubyonrails.org/' %>
+<% end %>
+
+<script>
+//jQuery实现textarea高度根据内容自适应
+$.fn.extend({
+    txtaAutoHeight: function () {
+        return this.each(function () {
+            var $this = $(this);
+            if (!$this.attr('initAttrH')) {
+                $this.attr('initAttrH', $this.outerHeight());
+            }
+            setAutoHeight(this).on('input', function () {
+                setAutoHeight(this);
+            });
+        });
+        function setAutoHeight(elem) {
+            var $obj = $(elem);
+            return $obj.css({ height: $obj.attr('initAttrH'), 'overflow-y': 'hidden' }).height(elem.scrollHeight);
+        }
+    }
+});
+
+//调用
+$(function () {
+    $("#post_content").txtaAutoHeight();
+});
+</script>
