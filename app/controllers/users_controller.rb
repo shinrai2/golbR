@@ -27,10 +27,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # GET /users/1/edit
-  def edit
-  end
-
   # POST /users
   # POST /users.json
   def create
@@ -44,7 +40,7 @@ class UsersController < ApplicationController
         # format.json { render :show, status: :created, location: @user }
         @user.send_activation_email
         flash[:info] = "Please check your email to activate your account."
-        redirect_to root_url
+        format.html { redirect_to root_url }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -52,6 +48,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end

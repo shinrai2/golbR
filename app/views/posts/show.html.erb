@@ -1,0 +1,11 @@
+<% provide(:title, @post.title) %>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3><%= @post.title %></h3>
+        <% if logged_in? %>
+            <div style="text-align: right;"><%= link_to "edit", edit_post_path(@post) %></div>
+        <% end %>
+        <pre style="word-break: keep-all; word-wrap: break-word; white-space: pre-wrap; white-space: -moz-pre-wrap" ><%= @post.content %></pre>
+    </div>
+</div>

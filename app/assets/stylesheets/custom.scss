@@ -8,6 +8,9 @@ body {
 /* body a:visited {
     color: #fff;
 } */
+a {
+    color: #333;
+}
 
 section {
     overflow: auto;
@@ -227,4 +230,9 @@ span.picture {
     input {
         border: 0;
     }
+}
+
+.title h6 {
+    font-size: 1.8em;
+    line-height: 1.0;
 }

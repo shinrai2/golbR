@@ -6,9 +6,9 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <ol>
-        Mail: <%= @user.email %>
-      </ol>
+      <br />
+      <span>Mail: <%= @user.email %></span>
+      <span>Create at: <%= @user.created_at %></span>
     </section>
   </aside>
   <div class="col-md-8">
