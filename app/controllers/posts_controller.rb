@@ -10,6 +10,9 @@ class PostsController < ApplicationController
     # GET /posts/1
     # GET /posts/1.json
     def show
+        email = current_user.email if !!current_user
+        @comment = @post.comments.build(post_id: @post.id, email: email)
+        @comments = @post.comments.paginate(page: params[:page])
     end
 
     def new
@@ -46,7 +49,7 @@ class PostsController < ApplicationController
     
     def destroy
         @post.destroy
-        flash[:success] = "Post deleted"
+        flash[:success] = "Post deleted."
         redirect_back(fallback_location: root_url)
     end
 

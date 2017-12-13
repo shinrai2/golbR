@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create!(name: "Example User",
-            email: "fuck@shinrai.cc",
+            email: "test@qq.com",
             password: "123456",
             password_confirmation: "123456",
             admin: true,
@@ -27,8 +27,15 @@ User.create!(name: "Example User",
 end
 
 users = User.order(:created_at).take(6)
-50.times do
-    title = Faker::Lorem.sentence(5)
-    content = Faker::Lorem.sentence(5)
-    users.each { |user| user.posts.create!(title: title, content: content) }
+# 50.times do
+#     title = Faker::Lorem.sentence(5)
+#     content = Faker::Lorem.sentence(5)
+#     users.each { |user| user.posts.create!(title: title, content: content) }
+# end
+users.each do |user|
+    10.times do
+        title = Faker::Lorem.sentence(5)
+        content = Faker::Lorem.sentence(5)
+        user.posts.create!(title: title, content: content)
+    end
 end

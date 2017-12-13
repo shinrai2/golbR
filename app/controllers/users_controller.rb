@@ -34,12 +34,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        # log_in @user
-        # flash[:success] = 'User was successfully created.'
-        # format.html { redirect_to @user }
-        # format.json { render :show, status: :created, location: @user }
-        @user.send_activation_email
-        flash[:info] = "Please check your email to activate your account."
+        # @user.send_activation_email
+        flash[:info] = "Please check your email to activate your account. #{edit_account_activation_url(@user.activation_token,
+        email: @user.email)}"
         format.html { redirect_to root_url }
       else
         format.html { render :new }

@@ -2,10 +2,37 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3><%= @post.title %></h3>
-        <% if logged_in? %>
-            <div style="text-align: right;"><%= link_to "edit", edit_post_path(@post) %></div>
-        <% end %>
+        <div style="padding-top: 5px; padding-bottom: 12px;">
+            <span class="title"><h6><%= @post.title %></h6></span>
+            <span class="timestamp">
+                <%= link_to @post.user.name, @post.user %>
+                Posted <%= time_ago_in_words(@post.created_at) %> ago.
+                <% if current_user?(@post.user) %>
+                    <%= link_to "edit", edit_post_path(@post) %>
+                <% end %>
+            </span>
+        </div>
         <pre style="word-break: keep-all; word-wrap: break-word; white-space: pre-wrap; white-space: -moz-pre-wrap" ><%= @post.content %></pre>
+        <h3>Comments</h3>
+        <div class="col-md-6">
+            <%= form_for(@comment) do |f| %>
+                <%= render 'shared/error_messages', object: f.object %>
+                <%= hidden_field_tag :post_id, @post.id %>
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %>
+
+                <%= f.label :content %>
+                <%= f.text_area :content, class: 'form-control' %>
+
+                <%= f.submit "Post", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+        <div class="col-md-6">
+            <%# 评论 %>
+            <ol class="comments">
+                <%= render @comments %>
+            </ol>
+            <%= will_paginate @comments %>
+        </div>
     </div>
 </div>
